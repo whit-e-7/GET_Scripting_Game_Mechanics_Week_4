@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Static
   - wall
+  - rock
+  - rock 2
+  - rock 3
   layers:
   - Default
   - TransparentFX

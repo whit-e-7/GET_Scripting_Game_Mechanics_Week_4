@@ -2,12 +2,33 @@ using UnityEngine;
 
 public class GET_Collision : MonoBehaviour
 {
+    public AudioClip collisionSound;  // Reference to the sound clip you want to play
+    private AudioSource audioSource;  // Reference to the AudioSource component
+
+    void Start()
+    {
+        // Get the AudioSource component attached to this GameObject
+        audioSource = GetComponent<AudioSource>();
+
+        // If no AudioSource is attached, add one dynamically
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
     // This will be called when another collider enters this object's trigger.
     void OnTriggerEnter(Collider other)
     {
         // If the object that collided with this object has the "Player" tag
         if (other.CompareTag("Player"))
         {
+            // Play the collision sound
+            if (collisionSound != null)
+            {
+                audioSource.PlayOneShot(collisionSound);
+            }
+
             // Destroy the object with the "TriggerObject" tag when the player enters its trigger
             Destroy(gameObject);
 
